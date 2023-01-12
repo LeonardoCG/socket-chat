@@ -3,7 +3,7 @@ const miForm = document.querySelector('form');
 
 const url = window.location.hostname.includes("localhost")
   ? "http://localhost:8080/api/auth/"
-  : "https://http-nodejs-production-3d7e.up.railway.app";
+  : "https://http-nodejs-production-3d7e.up.railway.app/auth/";
 //"https://rest-server-v.herokuapp.com/api/auth/google";
 
 miForm.addEventListener('submit', ev => {
@@ -28,17 +28,15 @@ miForm.addEventListener('submit', ev => {
     }
 
     localStorage.setItem('token', token );
+    window.location = 'chat.html';
+
+
   })
   .catch( err => {
     console.log(err);
   });
   
 });
-
-
-
-
-
 
 
 function handleCredentialResponse(response) {
@@ -57,6 +55,7 @@ function handleCredentialResponse(response) {
     .then((resp) => {
       //console.log(resp);
       localStorage.setItem("email", resp.usuario.correo);
+      window.location = 'chat.html';
     })
     .catch(console.warn);
 }
