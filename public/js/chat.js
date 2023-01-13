@@ -7,6 +7,13 @@ const url = window.location.hostname.includes("localhost")
 let usuario = null;
 let socket = null;
 
+//Referencias HTML
+const txtUid     = document.querySelector('#txtUid');
+const txtMensaje = document.querySelector('#txtMensaje');
+const ulUsaurios = document.querySelector('#ulUsuarios');
+const ulMensaje  = document.querySelector('#ulMensaje');
+const btnSalir   = document.querySelector('#btnSalir');
+
 //validar jwt 
 const validarJWT = async() => {
     const token = localStorage.getItem('token') || '';
@@ -34,11 +41,33 @@ const validarJWT = async() => {
 
 const conectarSocket = async() => {
     //
-    const socket = io({
+    socket = io({
         'extraHeaders':{
             'x-token': localStorage.getItem('token')
         }
     });
+
+    socket.on('connect', () => {
+        console.log('Sockets online');
+    });
+
+    socket.on('disconnect', () => {
+        console.log('Sockets Offline')
+    });
+
+    socket.on('recibir-mensaje', () => {
+        //TODO:
+    });
+
+    socket.on('usuarios-activos', () => {
+        //TODO:
+    });
+
+    socket.on('mensaje-privado', () => {
+        //TODO:
+    });
+
+
 }
 
 
