@@ -5,7 +5,7 @@ const { createServer } = require('http');
 
 
 const { dbConnection } = require('../database/config');
-const socketController = require('../controllers/socketController');
+const { socketController } = require('../controllers/socketController');
 
 class Server {
 
@@ -76,7 +76,7 @@ class Server {
     }
 
     sockets() {
-        this.io.on('connection',( socket ) => socketController, this.io);
+        this.io.on('connection',( socket ) => socketController(socket, this.io));
     }
 
     listen() {
