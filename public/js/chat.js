@@ -54,15 +54,12 @@ const conectarSocket = async() => {
         console.log('Sockets Offline')
     });
 
-    socket.on('recibir-mensaje', (payload) => {
-        //TODO:
-        console.log(payload)
-    });
+    socket.on('recibir-mensaje',  dibujarMensajes);
 
     socket.on('usuarios-activos', dibujarUsuarios);
 
-    socket.on('mensaje-privado', () => {
-        //TODO:
+    socket.on('mensaje-privado',( payload ) => {
+        console.log('privado: ', payload);
     });
 
 }
@@ -84,6 +81,25 @@ const dibujarUsuarios = ( usuarios = []) => {
 
     ulUsuarios.innerHTML = userHtml;
 }
+
+const dibujarMensajes = ( mensajes = []) => {
+
+    let mensajesHtml = '';
+    mensajes.forEach( ({nombre, mensaje}) => {
+
+        mensajesHtml += `
+            <li>
+                <p>
+                    <span class="text-primary"> ${ nombre }</span>
+                    <span>${ mensaje }</span>
+                </p>
+            </li>
+        `;
+    });
+
+    ulMensaje.innerHTML = mensajesHtml;
+}
+
 //keyup, corresponde a una tecla devolviendo un numero
 txtMensaje.addEventListener('keyup', ({ keyCode }) => {
 
